@@ -32,7 +32,7 @@ namespace nimapInfotech.Entity
                  {
                      Id = 1,
                      Name = "Prime Video",
-                     DepartmentId = 1,
+                     CategoryId = 1,
                      CreatedBy = "Yashi",
                      CreatedOn = DateTime.Now
                  }

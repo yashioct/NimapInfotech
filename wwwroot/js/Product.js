@@ -1,18 +1,17 @@
-﻿
-
-
-var table = null;
+﻿var table = null;
 $(document).ready(function () {
     table = $('#example').DataTable({
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "/Category/LoadCategoryMaster",
+            "url": "/Product/LoadProductMaster",
             "type": "POST"
         },
         "columns": [
-            { "data": "id", title: "Category ID", name: "ID" },
-            { "data": "name", title: "Category Name", name: "Name" },
+            { "data": "id", title: "Product ID", name: "ID" },
+            { "data": "name", title: "Product Name", name: "Name" },
+            { "data": "categoryId", title: "Category Id", name: "CategoryId" },
+            { "data": "categoryMasterName", title: "Category Name", name: "categoryMasterName" },
             {
                 "data": "id", title: "Action", name: "Action", "render":
                     function (data, type, full, meta) {
@@ -27,7 +26,7 @@ $(document).on("click", ".btnDelete", function () {
     var data = table.row($(this).parents('tr')).data();
     $.ajax({
         type: "Delete",
-        url: "/Category/DeleteCategory?id=" + data.id,
+        url: "/Product/DeleteProduct?id=" + data.id,
         cache: false,
         success: function (data) {
             if (data.success) {
@@ -44,8 +43,8 @@ $(document).on("click", ".btnUpdate", function () {
     var data = table.row($(this).parents('tr')).data();
     $.ajax({
         type: "POST",
-        url: "/Category/AddCategory",
-        data: { Id: data.id, Name: data.name },
+        url: "/Product/AddProduct",
+        data: { Id: data.id, Name: data.name, CategoryID: data.categoryId },
         cache: false,
         success: function (data) {
             $("#myModal").html(data);
@@ -57,7 +56,7 @@ $(document).on("click", ".btnUpdate", function () {
 $(document).on("click", "#btnCreate", function () {
     $.ajax({
         type: "POST",
-        url: "/Category/AddCategory",
+        url: "/Product/AddProduct",
         data: { Id: 0, Name: '' },
         cache: false,
         success: function (data) {
@@ -67,13 +66,11 @@ $(document).on("click", "#btnCreate", function () {
     });
 });
 
-
-
 $(document).on("click", "#btnSave", function () {
     $.ajax({
         type: "POST",
-        url: "/Category/SaveAddCategory",
-        data: { Id: +$('#hdnCategoryID').val(), Name: $('#txtCategoryName').val() },
+        url: "/Product/SaveAddProduct",
+        data: { Id: +$('#hdnProductID').val(), Name: $('#txtProductName').val(), CategoryID: $('#ddlCategoryID').val() },
         cache: false,
         success: function (data) {
             if (data.success) {

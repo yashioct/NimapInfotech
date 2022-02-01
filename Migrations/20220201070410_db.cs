@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace nimapInfotech.Migrations
 {
-    public partial class yashi : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,14 +41,14 @@ namespace nimapInfotech.Migrations
                     ModifiedByIP = table.Column<string>(nullable: true),
                     isActive = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    DepartmentId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductMaster", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductMaster_CategoryMaster_DepartmentId",
-                        column: x => x.DepartmentId,
+                        name: "FK_ProductMaster_CategoryMaster_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "CategoryMaster",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -57,17 +57,17 @@ namespace nimapInfotech.Migrations
             migrationBuilder.InsertData(
                 table: "CategoryMaster",
                 columns: new[] { "Id", "CreatedBy", "CreatedByIP", "CreatedOn", "ModifiedBy", "ModifiedByIP", "ModifiedOn", "Name", "isActive" },
-                values: new object[] { 1, "Yashi", null, new DateTime(2022, 1, 31, 19, 19, 53, 668, DateTimeKind.Local).AddTicks(2134), null, null, null, "Entertainment", true });
+                values: new object[] { 1, "Yashi", null, new DateTime(2022, 2, 1, 12, 34, 7, 365, DateTimeKind.Local).AddTicks(7502), null, null, null, "Entertainment", true });
 
             migrationBuilder.InsertData(
                 table: "ProductMaster",
-                columns: new[] { "Id", "CreatedBy", "CreatedByIP", "CreatedOn", "DepartmentId", "ModifiedBy", "ModifiedByIP", "ModifiedOn", "Name", "isActive" },
-                values: new object[] { 1, "Yashi", null, new DateTime(2022, 1, 31, 19, 19, 53, 672, DateTimeKind.Local).AddTicks(3777), 1, null, null, null, "Prime Video", true });
+                columns: new[] { "Id", "CategoryId", "CreatedBy", "CreatedByIP", "CreatedOn", "ModifiedBy", "ModifiedByIP", "ModifiedOn", "Name", "isActive" },
+                values: new object[] { 1, 1, "Yashi", null, new DateTime(2022, 2, 1, 12, 34, 7, 369, DateTimeKind.Local).AddTicks(2308), null, null, null, "Prime Video", true });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductMaster_DepartmentId",
+                name: "IX_ProductMaster_CategoryId",
                 table: "ProductMaster",
-                column: "DepartmentId");
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

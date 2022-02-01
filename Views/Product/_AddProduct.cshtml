@@ -1,10 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@model AddCategory;
+﻿
+@model AddProduct;
 @{
     string SaveBtnText = Model?.Id > 0 ? "Update" : "Save";
 }
@@ -12,18 +7,22 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Category</h5>
+            <h5 class="modal-title">Product</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            @* <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" asp-for="Id" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>*@
-            <input type="hidden" asp-for="Id" id="hdnCategoryID" />
+
+            <input type="hidden" asp-for="Id" id="hdnProductID" />
             <div class="mb-3">
                 <label for="Name" class="form-label">Name</label>
-                <input type="text" class="form-control" asp-for="Name" id="txtCategoryName">
+                <input type="text" class="form-control" asp-for="Name" id="txtProductName">
+            </div>
+            <div class="mb-3">
+                <label for="Category" class="form-label">Category</label>
+                <select asp-for="CategoryID" class="form-control" id="ddlCategoryID"
+                        asp-items="Model.CategoryMasterList">
+                    <option>--Select--</option>
+                </select>
             </div>
         </div>
         <div class="modal-footer">
